@@ -17,7 +17,7 @@ export default function Page() {
             </SignedIn>
             <SignedOut>
                 <View style={{flexDirection: 'column', justifyContent: "center", alignItems: "center", gap: 30}}>
-                    <View style={{backgroundColor: 'gray', shadowColor: "#000", shadowOffset: {width: 0, height: 2}, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5}}>
+                    <View>
                         <Link href="/(auth)/sign-in">
                             <Text style={{fontWeight: "bold", fontSize: 30}}>Sign in</Text>
                         </Link>
