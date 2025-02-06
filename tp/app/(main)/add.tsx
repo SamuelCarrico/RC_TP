@@ -24,7 +24,7 @@ export default function Add() {
             setLastFood(foods[foods.length - 1]);
         };
         loadLastFood();
-    }, []);
+    }, [foods]);
     return (
         <SafeAreaView>
             <SearchBar/>

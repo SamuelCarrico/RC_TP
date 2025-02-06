@@ -1,10 +1,11 @@
-import { useSignIn } from '@clerk/clerk-expo'
-import { Link, useRouter } from 'expo-router'
-import { Text, TextInput, Button, View } from 'react-native'
+import {useSignIn} from '@clerk/clerk-expo'
+import {Link, useRouter} from 'expo-router'
+import {Text, TextInput, Button, View, TouchableOpacity} from 'react-native'
 import React from 'react'
+import styles from "../../styles/styles";
 
 export default function Page() {
-    const { signIn, setActive, isLoaded } = useSignIn()
+    const {signIn, setActive, isLoaded} = useSignIn()
     const router = useRouter()
 
     const [emailAddress, setEmailAddress] = React.useState('')
@@ -24,7 +25,7 @@ export default function Page() {
             // If sign-in process is complete, set the created session as active
             // and redirect the user
             if (signInAttempt.status === 'complete') {
-                await setActive({ session: signInAttempt.createdSessionId })
+                await setActive({session: signInAttempt.createdSessionId})
                 router.replace('/')
             } else {
                 // If the status isn't complete, check why. User might need to
@@ -39,26 +40,37 @@ export default function Page() {
     }, [isLoaded, emailAddress, password])
 
     return (
-        <View>
+        <View style={styles.container}>
+            <Text style={styles.titleSign}>Sign In</Text>
+
             <TextInput
+                style={styles.inputSign}
                 autoCapitalize="none"
-                value={emailAddress}
                 placeholder="Enter email"
-                onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
+                value={emailAddress}
+                onChangeText={setEmailAddress}
             />
+
             <TextInput
-                value={password}
+                style={styles.inputSign}
                 placeholder="Enter password"
-                secureTextEntry={true}
-                onChangeText={(password) => setPassword(password)}
+                secureTextEntry
+                value={password}
+                onChangeText={setPassword}
             />
-            <Button title="Sign in" onPress={onSignInPress} />
-            <View>
-                <Text>Don't have an account?</Text>
-                <Link href="/sign-up">
-                    <Text>Sign up</Text>
+
+            <TouchableOpacity style={styles.buttonSign} onPress={onSignInPress}>
+                <Text style={styles.buttonTextSign}>Sign In</Text>
+            </TouchableOpacity>
+
+            <View style={styles.linkContainerSign}>
+                <Text style={styles.textSign}>Don't have an account?</Text>
+                <Link href="/sign-up" asChild>
+                    <TouchableOpacity>
+                        <Text style={styles.linkSign}>Sign up</Text>
+                    </TouchableOpacity>
                 </Link>
             </View>
         </View>
-    )
+    );
 }

@@ -4,10 +4,16 @@ import {Text, View} from 'react-native'
 import Welcome from "../../components/welcome/Welcome";
 import ActionsMenu from "../../components/actions-menu/ActionsMenu";
 import MealsList from "../../components/meals-list/MealsList";
+import useDatabase from "../../hooks/useDatabase";
+import {useEffect} from "react";
 
 export default function Page() {
     const {user} = useUser()
+    const {initDatabase} = useDatabase();
 
+    useEffect(() => {
+        initDatabase()
+    }, []);
     return (
         <View>
             <SignedIn>

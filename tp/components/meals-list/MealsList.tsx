@@ -5,11 +5,12 @@ import {Animated, ListRenderItemInfo, Text, View} from "react-native";
 import FlatList = Animated.FlatList;
 import useDatabase from "../../hooks/useDatabase";
 import {Meal} from "../../types/Meal";
+import MealItem from "../meal-item/MealItem";
 
 export default function MealsList() {
     const [mealsList, setMealsList] = useState<Meal[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const {fetchMeals, meals} = useDatabase();
+    const {fetchMeals, meals, deleteMeal} = useDatabase();
 
 
     useFocusEffect(
@@ -19,7 +20,6 @@ export default function MealsList() {
                 await fetchMeals();
                 setMealsList(meals);
                 setIsLoading(false);
-                console.log('Meals', meals);
             };
             loadMeals();
 
@@ -34,23 +34,25 @@ export default function MealsList() {
             </View>
         );
     }
+    //TODO
+
+    if (mealsList.length === 0) {
+        return (
+            <View style={{alignItems: 'center', marginTop: 20}}>
+                <Text style={{fontSize: 20}}>Aucun  repas enregistré !</Text>
+                <Text style={{fontSize: 15, fontStyle: "italic"}}>Bug de remonté  des données. Quand j'actualise avec Ctrl+S dans l'éditeur de code, ca charge la base de données. </Text>
+            </View>
+        );
+    }
 
     return (
         <View>
             <FlatList
+                ItemSeparatorComponent={() => <View style={{height: 20}} />}
                 data={mealsList}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({item}: ListRenderItemInfo<Meal>) => (
-
-                    <Card>
-                        <Card.Title title={item.name}/>
-                        <Card.Content>
-                            <Text>{item.totalCalories}</Text>
-                        </Card.Content>
-                        <Card.Actions>
-                            <Button mode='elevated' icon='delete'>Supprimer</Button>
-                        </Card.Actions>
-                    </Card>
+                    <MealItem id={item.id} date={item.date} name={item.name} totalCalories={item.totalCalories}/>
                 )}
             />
         </View>

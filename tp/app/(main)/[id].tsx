@@ -4,6 +4,7 @@ import {useFocusEffect} from "expo-router";
 import {Meal} from "../../types/Meal";
 import {useLocalSearchParams} from "expo-router";
 import Database from "../../services/db.service";
+import MealDetails from "../../components/meal-details/MealDetails";
 
 
 export default function DetailMeal() {
@@ -26,5 +27,6 @@ export default function DetailMeal() {
 
     useFocusEffect(() => loadMeal);
 
-    return (<MealItem id={meal.id} date={meal.date} name={meal.name ?? ""} totalCalories={meal.totalCalories}/>);
+    return (
+        <MealDetails />);
 }

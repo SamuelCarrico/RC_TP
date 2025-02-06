@@ -81,4 +81,57 @@ export default StyleSheet.create({
         textAlign: "center",
         padding: 10
     },
+    containerSign: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 20,
+        backgroundColor: "#f9f9f9",
+    },
+    titleSign: {
+        fontSize: 24,
+        fontWeight: "bold",
+        marginBottom: 20,
+    },
+    inputSign: {
+        width: "100%",
+        height: 50,
+        borderWidth: 1,
+        borderColor: "#ccc",
+        borderRadius: 10,
+        paddingHorizontal: 15,
+        backgroundColor: "#fff",
+        marginBottom: 15,
+    },
+    buttonSign: {
+        width: "100%",
+        backgroundColor: "#007bff",
+        paddingVertical: 12,
+        borderRadius: 10,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    buttonTextSign: {
+        color: "#fff",
+        fontSize: 18,
+        fontWeight: "bold",
+    },
+    linkContainerSign: {
+        flexDirection: "row",
+        marginTop: 15,
+    },
+    textSign: {
+        fontSize: 16,
+        color: "#555",
+    },
+    linkSign: {
+        fontSize: 16,
+        fontWeight: "bold",
+        color: "#007bff",
+        marginLeft: 5,
+    },
 });
