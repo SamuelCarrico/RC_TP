@@ -34,8 +34,6 @@ export default function useDatabase() {
                     FOREIGN KEY(mealId) REFERENCES meal(id) ON DELETE CASCADE
                 );
             `);
-
-            console.log("Database initialized");
         } catch (error) {
             console.error("Error initializing database:", error);
         }
@@ -124,5 +122,5 @@ export default function useDatabase() {
         })();
     }, [initDatabase, fetchMeals]);
 
-    return { initDatabase, meals, foods, lastFood, fetchMeals, fetchFoods, addMeal, addFood, getLastFood, deleteMeal, getMealById };
+    return { db, initDatabase, meals, foods, lastFood, fetchMeals, fetchFoods, addMeal, addFood, getLastFood, deleteMeal, getMealById };
 }

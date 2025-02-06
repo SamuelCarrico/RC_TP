@@ -6,6 +6,7 @@ import FlatList = Animated.FlatList;
 import useDatabase from "../../hooks/useDatabase";
 import {Meal} from "../../types/Meal";
 import MealItem from "../meal-item/MealItem";
+import { getMeals } from '../../db/meal';
 
 export default function MealsList() {
     const [mealsList, setMealsList] = useState<Meal[]>([]);
@@ -17,11 +18,10 @@ export default function MealsList() {
         useCallback(() => {
             const loadMeals = async () => {
                 setIsLoading(true);
-                await fetchMeals();
-                setMealsList(meals);
+                const meals = await getMeals();
+                setMealsList(meals ?? []);
                 setIsLoading(false);
             };
-            loadMeals();
 
             return () => setMealsList([]);
         }, [])
@@ -39,7 +39,7 @@ export default function MealsList() {
     if (mealsList.length === 0) {
         return (
             <View style={{alignItems: 'center', marginTop: 20}}>
-                <Text style={{fontSize: 20}}>Aucun  repas enregistré !</Text>
+                <Text style={{fontSize: 20}}>Aucun repas enregistré !</Text>
                 <Text style={{fontSize: 15, fontStyle: "italic"}}>Bug de remonté  des données. Quand j'actualise avec Ctrl+S dans l'éditeur de code, ca charge la base de données. </Text>
             </View>
         );
